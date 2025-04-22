@@ -20,7 +20,7 @@ wfuzz -c -z file,users.txt -z file,/home/crystal/secLists/Passwords/probable-v2-
 
 **MEDIUM**
 
-Teniendo el DVWA configurado con el nivel de seguridad en 'Medium'. Resulta que se usa la misma herrmoiente y la contraseña parece ser la misma que usa en el nivel 'Low', pero nos fijamos en la lngrud de resultado para la elección.
+Teniendo el DVWA configurado con el nivel de seguridad en 'Medium'. Usando la misma herramienta, la contraseña es la misma que usa en el nivel 'Low', pero nos fijamos en la longitud de resultado para la elección.
 
 ![general](https://github.com/pedmonsot/DVWA/blob/main/Images/BF3.png)
 
@@ -107,7 +107,7 @@ Al hacerlo, se ejecuta el web shell AK-74, lo cual nos da acceso total al servid
 - Eliminar archivos
 
 - Ejecutar comandos
-- 
+  
 ![general](https://github.com/pedmonsot/DVWA/blob/main/Images/FU3.png)
 
 **MEDIUM**
@@ -187,7 +187,7 @@ Aunque el mensaje devuelto es ``"User ID is MISSING from the database"``, si el 
 
 Este tipo de inyección se basa en medir el tiempo de respuesta para confirmar la vulnerabilidad, y como se ve en la imagen, el código se inyecta correctamente.
 
-https://github.com/pedmonsot/DVWA/blob/main/Images/SQLIB1.png
+![general](https://github.com/pedmonsot/DVWA/blob/main/Images/SQLIB1.png)
 
 Y como en el ejercicio anterior he tenido problemas con el cambio de código desde el navegador realizazo el high.  
 
@@ -195,48 +195,48 @@ Y como en el ejercicio anterior he tenido problemas con el cambio de código des
 
 En este caso realizando SQL Injection pero a través de una cookie, específicamente la cookie id. Desde la ventana emergente.
 
-https://github.com/pedmonsot/DVWA/blob/main/Images/SQLIB2.png
+![general](https://github.com/pedmonsot/DVWA/blob/main/Images/SQLIB2.png)
 
 Luego de enviarlo, se puede ver en las herramientas del navegador que el valor de la cookie id ha sido modificado correctamente y está codificado en URL. Aunque en pantalla la app solo muestra el mensaje ``'"User ID is MISSING from the database"``, el comportamiento del servidor, esperando 5 segundos antes de responder, confirma que la inyección se está ejecutando correctamente en segundo plano.
 
 Este retraso es una señal clara de que la consulta SQL fue manipulada con éxito, aunque no se obtenga información directamente.
 
-https://github.com/pedmonsot/DVWA/blob/main/Images/SQLIB3.png
+![general](https://github.com/pedmonsot/DVWA/blob/main/Images/SQLIB3.png)
 
 ## XSS Reflected
 **LOW**
 
 En este caso del tipo XSS reflected. El código fuente muestra que el valor del parámetro name se inserta directamente en el HTML sin ningún tipo de validación o sanitización.
 
-https://github.com/pedmonsot/DVWA/blob/main/Images/xss1.png
+![general](https://github.com/pedmonsot/DVWA/blob/main/Images/xss1.png)
 
 Así que introducimos el siguiente payload:
 ```
 ?name=<script>alert("XSS")</script>
 ```
-https://github.com/pedmonsot/DVWA/blob/main/Images/xss2.png
+![general](https://github.com/pedmonsot/DVWA/blob/main/Images/xss2.png)
 
 El navegador interpreta el código JavaScript, ejecutando una alerta con el texto "XSS". Esto demuestra que es posible inyectar y ejecutar scripts maliciosos a través del parámetro name.
 
-https://github.com/pedmonsot/DVWA/blob/main/Images/xss3.png
+![general](https://github.com/pedmonsot/DVWA/blob/main/Images/xss3.png)
 
 **MEDIUM**
 
 En el nivel medium de la vulnerabilidad Reflected XSS, el código intenta prevenir ataques eliminando cualquier aparición exacta de ``<script>`` en el parámetro name.
 
-https://github.com/pedmonsot/DVWA/blob/main/Images/xss4.png
+![general](https://github.com/pedmonsot/DVWA/blob/main/Images/xss4.png)
 
 Como se ve en la segunda imagen, se puede usar un payload ofuscado como:
 ```
 <scr<script>ipt>alert("You have been hacked")</script>
 ```
-https://github.com/pedmonsot/DVWA/blob/main/Images/xss5.png
+![general](https://github.com/pedmonsot/DVWA/blob/main/Images/xss5.png)
 
 El primer ``<script>`` es eliminado por la función ``str_replace``, pero al quedar el resto intacto ``<script>ipt> se convierte nuevamente en <script>``, el navegador lo interpreta como código válido.
 
 El script se ejecuta correctamente y lanza una alerta, demostrando que la protección implementada es insuficiente.
 
-https://github.com/pedmonsot/DVWA/blob/main/Images/xss6.png
+![general](https://github.com/pedmonsot/DVWA/blob/main/Images/xss6.png)
 
 ## XSS Stored
 **LOW**
@@ -245,11 +245,11 @@ A diferencia del XSS reflected, donde el script se ejecuta al momento de enviarl
 ```
 <script>alert("Got it")</script>
 ```
-https://github.com/pedmonsot/DVWA/blob/main/Images/XSSS1.png
+![general](https://github.com/pedmonsot/DVWA/blob/main/Images/XSSS1.png)
 
 Como se ve en la imagen, el mensaje aparece en un ``alert``, confirmando que el script fue almacenado y luego ejecutado al visualizar el contenido.
 
-https://github.com/pedmonsot/DVWA/blob/main/Images/XSSS2.png
+![general](https://github.com/pedmonsot/DVWA/blob/main/Images/XSSS2.png)
 
 **MEDIUM**
 
@@ -261,4 +261,4 @@ Por eso, como se muestra en la imagen, se puede ofuscar el payload usando mayús
 ```
 Esta variante evade el filtro simple y logra ejecutar el código malicioso. El script queda almacenado en la base de datos, y cada vez que se visualiza el mensaje, se ejecuta, mostrando el texto “Hacked!!” en la página. Esto confirma que el sistema sigue siendo vulnerable, aunque tenga medidas de protección mínimas.
 
-https://github.com/pedmonsot/DVWA/blob/main/Images/XSSS3.png
+![general](https://github.com/pedmonsot/DVWA/blob/main/Images/XSSS3.png)
