@@ -4,7 +4,7 @@
 
 Damn Vulnerable Web Application (DVWA) es una aplicación web diseñada intencionalmente con vulnerabilidades de seguridad para fines educativos. Su objetivo es permitir a desarrolladores y profesionales de ciberseguridad practicar técnicas de pentesting en un entorno controlado y seguro. DVWA incluye múltiples retos de seguridad clasificados por nivel de dificultad, enfocados en vulnerabilidades comunes como SQL Injection, XSS, CSRF, entre otras.
 
-https://github.com/pedmonsot/DVWA/blob/main/Images/general.png
+![general](https://github.com/user-attachments/assets/05639006-28cc-40c9-bd71-fadfae4e744b)
 
 ## Brute Force
 **LOW**
@@ -14,7 +14,7 @@ Se ha utilizado la herramienta Wfuzz, similar a Hydra, para realizar un ataque d
 wfuzz -c -z file,users.txt -z file,/home/crystal/secLists/Passwords/probable-v2-top1575.txt -b 'security=medium; PHPSESSID=cnavat4393qp4r1k36qp7h3ec' \
 'http://127.0.0.1/dvwa/vulnerabilities/brute/index.php?username=FUZZ&password=FUZZ&Login=Login'
 ```
-https://github.com/pedmonsot/DVWA/blob/main/Images/BF1.png
+![general](https://github.com/pedmonsot/DVWA/blob/main/Images/BF1.png)
 
 https://github.com/pedmonsot/DVWA/blob/main/Images/BF2.png
 
