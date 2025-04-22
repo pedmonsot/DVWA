@@ -154,7 +154,7 @@ La aplicación ejecuta la consulta inyectada y nos muestra los datos de todos lo
 
 **MEDIUM**
 
-En el nivel "medium", la idea es inyectar el código malicioso directamente desde el código fuente de la página, modificando el valor de las opciones del <select> que controla el parámetro id. En la primera imagen se ve cómo se añade manualmente una opción con el payload malicioso:
+En el nivel "medium", la idea es inyectar el código malicioso directamente desde el código fuente de la página, modificando el valor de las opciones del ``<select>`` que controla el parámetro id. En la primera imagen se ve cómo se añade manualmente una opción con el payload malicioso:
 
 ![general](https://github.com/pedmonsot/DVWA/blob/main/Images/SQLI3.png)
 
